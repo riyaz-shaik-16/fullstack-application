@@ -1,0 +1,16 @@
+services:
+  backend:
+    image: shaikriyaz668/fsapp-backend:1.0
+    ports:
+      - "8989:8989"
+    env_file:
+      - ./backend/.env
+
+  frontend:
+    image: shaikriyaz668/fsapp-frontend:1.0
+    ports:
+      - "5173:5173"
+    env_file:
+      - ./frontend/.env
+    depends_on:
+      - backend
