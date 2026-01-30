@@ -2,10 +2,11 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 
 const links = [
-  { name: "Projects", to: "/admin/projects" },
-  { name: "Clients", to: "/admin/clients" },
-  { name: "Contacts", to: "/admin/contacts" },
-  { name: "Subscribers", to: "/admin/subscribers" },
+  { name: "Projects", to: "/admin/projects", icon: "fa-solid fa-folder-open" },
+  { name: "Clients", to: "/admin/clients", icon: "fa-solid fa-users" },
+  { name: "Contacts", to: "/admin/contacts", icon: "fa-solid fa-envelope" },
+  { name: "Subscribers", to: "/admin/subscribers", icon: "fa-solid fa-bell" },
+  { name: "Home", to: "/", icon: "fa-solid fa-house" },
 ];
 
 const Sidebar = () => {
@@ -15,12 +16,15 @@ const Sidebar = () => {
     <>
       {/* Mobile Top Bar */}
       <div className="lg:hidden flex items-center justify-between bg-white border-b px-4 h-14">
-        <h2 className="text-lg font-semibold">Admin Panel</h2>
+        <div className="flex items-center gap-2">
+          <i className="fa-solid fa-table-columns text-gray-700"></i>
+          <h2 className="text-lg font-semibold">Admin Panel</h2>
+        </div>
         <button
           onClick={() => setOpen(true)}
           className="text-2xl font-semibold"
         >
-          ☰
+          <i className="fa-solid fa-bars"></i>
         </button>
       </div>
 
@@ -35,16 +39,24 @@ const Sidebar = () => {
       {/* Sidebar */}
       <aside
         className={`
-          fixed top-0 left-0 z-50 h-screen w-64 bg-white border-r
+          fixed top-0 left-0 z-50 h-screen w-64 bg-white
           transform transition-transform duration-300
           ${open ? "translate-x-0" : "-translate-x-full"}
           lg:translate-x-0
         `}
       >
         <div className="p-6 h-full flex flex-col">
-          <h2 className="text-xl font-semibold mb-8 hidden lg:block">
-            Admin Panel
-          </h2>
+          <div className="flex items-center gap-2 mb-8 hidden lg:flex">
+            <i className="fa-solid fa-table-columns text-gray-700"></i>
+            <h2 className="text-xl font-semibold">Admin Panel</h2>
+          </div>
+
+          <button
+            onClick={() => setOpen(false)}
+            className="lg:hidden absolute top-4 right-4 text-xl"
+          >
+            <i className="fa-solid fa-xmark"></i>
+          </button>
 
           <nav className="flex flex-col space-y-4">
             {links.map((link) => (
@@ -54,7 +66,7 @@ const Sidebar = () => {
                 onClick={() => setOpen(false)}
                 className={({ isActive }) =>
                   `
-                  px-3 py-2 rounded font-medium transition
+                  flex items-center gap-3 px-3 py-2 rounded font-medium transition
                   ${
                     isActive
                       ? "bg-blue-50 text-blue-600"
@@ -63,7 +75,12 @@ const Sidebar = () => {
                 `
                 }
               >
-                {link.name}
+                {({ isActive }) => (
+                  <>
+                    <i className={`${link.icon} ${isActive ? "text-blue-600" : "text-gray-500"}`}></i>
+                    <span>{link.name}</span>
+                  </>
+                )}
               </NavLink>
             ))}
           </nav>

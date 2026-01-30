@@ -45,7 +45,7 @@ const OurProjects = () => {
             No projects found.
           </div>
         ) : (
-          <div className="mt-12 flex flex-wrap justify-center gap-8">
+          <div className="mt-12 flex flex-wrap justify-center gap-5">
             {projects.map((project) => (
               <div
                 key={project._id}

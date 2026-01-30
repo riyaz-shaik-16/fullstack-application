@@ -3,7 +3,7 @@ import { api } from "../services/api";
 
 const Projects = () => {
   const [projects, setProjects] = useState([]);
-  const [error,setError] = useState("");
+  const [error, setError] = useState("");
   const [form, setForm] = useState({
     name: "",
     description: "",
@@ -43,6 +43,8 @@ const Projects = () => {
       }
 
       setForm({ name: "", description: "", image: null });
+      const fileInput = document.querySelector('input[type="file"]');
+      if (fileInput) fileInput.value = "";
       fetchProjects();
     } catch (err) {
       setError(err.message || "Something went wrong. Please try again.");
@@ -52,7 +54,7 @@ const Projects = () => {
   };
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-slate-50 via-blue-50 to-indigo-50 p-6">
+    <div className="min-h-screen bg-white p-6">
       <div className="max-w-7xl mx-auto space-y-8">
         {/* Header */}
         <div className="flex justify-between items-center">

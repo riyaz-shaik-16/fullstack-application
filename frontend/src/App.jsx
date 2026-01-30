@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { LandingPage, Clients, Contacts, Projects, Subscribers } from "./pages";
+import { LandingPage, Clients, Contacts, Projects, Subscribers, Dashboard } from "./pages";
 import AdminLayout from "./components/admin/AdminLayout"
 
 export const App = () => {
@@ -7,6 +7,7 @@ export const App = () => {
     <Routes>
       <Route path="/" element={<LandingPage />} />
       <Route path="/admin" element={<AdminLayout />}>
+        <Route index element={<Dashboard />} />
         <Route path="projects" element={<Projects />} />
         <Route path="clients" element={<Clients />} />
         <Route path="contacts" element={<Contacts />} />

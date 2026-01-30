@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 
-export default function Navbar() {
+export default function Navbar({onClick}) {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate()
 
   const scrollToProjects = () => {
     if (location.pathname !== "/") return;
@@ -54,12 +55,19 @@ export default function Navbar() {
               Clients
             </button>
 
-            <NavLink
-              to="/contact"
-              className="bg-orange-500 text-white px-5 py-2 rounded hover:bg-orange-600 transition"
+            <button
+              onClick={()=>navigate("/admin")}
+              className="text-gray-700 hover:text-blue-500 transition"
+            >
+              Admin Panel
+            </button>
+
+            <button
+              onClick={onClick}
+              className="bg-orange-500 text-white px-4 py-2 rounded text-center hover:bg-orange-600 transition"
             >
               Contact
-            </NavLink>
+            </button>
           </div>
 
           <button
@@ -96,13 +104,12 @@ export default function Navbar() {
               Clients
             </button>
 
-            <NavLink
-              to="/contact"
-              onClick={() => setIsOpen(false)}
+            <button
+              onClick={onClick}
               className="bg-orange-500 text-white px-4 py-2 rounded text-center hover:bg-orange-600 transition"
             >
               Contact
-            </NavLink>
+            </button>
           </div>
         </div>
       )}

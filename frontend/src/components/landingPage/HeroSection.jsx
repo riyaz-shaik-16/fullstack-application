@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { api } from "../../services/api";
+import Form from "./Form";
 
-const HeroSection = () => {
+const HeroSection = ({ formRef }) => {
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -42,76 +43,16 @@ const HeroSection = () => {
     }
   };
 
-  const Form = () => (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <input
-        name="name"
-        value={form.name}
-        onChange={handleChange}
-        type="text"
-        placeholder="Full Name"
-        required
-        className="w-full bg-white/10 border border-white/30 rounded-md px-4 py-2 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-orange-400"
-      />
-
-      <input
-        name="email"
-        value={form.email}
-        onChange={handleChange}
-        type="email"
-        placeholder="Enter Email Address"
-        required
-        className="w-full bg-white/10 border border-white/30 rounded-md px-4 py-2 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-orange-400"
-      />
-
-      <input
-        name="mobile"
-        value={form.mobile}
-        onChange={handleChange}
-        type="tel"
-        placeholder="Mobile Number"
-        required
-        className="w-full bg-white/10 border border-white/30 rounded-md px-4 py-2 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-orange-400"
-      />
-
-      <input
-        name="city"
-        value={form.city}
-        onChange={handleChange}
-        type="text"
-        placeholder="Area, City"
-        required
-        className="w-full bg-white/10 border border-white/30 rounded-md px-4 py-2 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-orange-400"
-      />
-
-      {error && (
-        <div className="text-sm text-red-300 bg-red-900/30 px-3 py-2 rounded">
-          {error}
-        </div>
-      )}
-
-      {message && (
-        <div className="text-sm text-green-300 bg-green-900/30 px-3 py-2 rounded">
-          {message}
-        </div>
-      )}
-
-      <button
-        type="submit"
-        disabled={loading}
-        className="w-full mt-4 bg-orange-500 text-white py-2 rounded-md font-medium hover:bg-orange-600 transition disabled:opacity-60"
-      >
-        {loading ? "Submitting..." : "Get Quick Quote"}
-      </button>
-    </form>
-  );
-
   return (
     <>
       {/* HERO */}
       <section
         className="relative w-full h-[90vh] bg-cover bg-center"
-        style={{ backgroundImage: "url('https://res.cloudinary.com/dxe17fztz/image/upload/v1769709109/image_sqhxao.png')" }}
+        style={{
+          backgroundImage:
+            "url('https://res.cloudinary.com/dxe17fztz/image/upload/v1769709109/image_sqhxao.png')",
+        }}
+        id="hero"
       >
         <div className="absolute inset-0 bg-black/25"></div>
 
@@ -127,7 +68,15 @@ const HeroSection = () => {
               <h3 className="text-white text-xl font-semibold text-center mb-6">
                 Get a Free <br /> Consultation
               </h3>
-              <Form />
+              <Form
+                form={form}
+                loading={loading}
+                error={error}
+                message={message}
+                onChange={handleChange}
+                onSubmit={handleSubmit}
+                formRef={formRef}
+              />
             </div>
           </div>
         </div>
@@ -139,7 +88,15 @@ const HeroSection = () => {
           <h3 className="text-white text-xl font-semibold text-center mb-6">
             Get a Free Consultation
           </h3>
-          <Form />
+          <Form
+            form={form}
+            loading={loading}
+            error={error}
+            message={message}
+            onChange={handleChange}
+            onSubmit={handleSubmit}
+            formRef={formRef}
+          />
         </div>
       </div>
     </>

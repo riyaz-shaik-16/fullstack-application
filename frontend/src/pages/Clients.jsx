@@ -26,23 +26,28 @@ const Clients = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
+  e.preventDefault();
+  setLoading(true);
 
-    const fd = new FormData();
-    fd.append("name", form.name);
-    fd.append("designation", form.designation);
-    fd.append("description", form.description);
-    fd.append("image", form.image);
+  const fd = new FormData();
+  fd.append("name", form.name);
+  fd.append("designation", form.designation);
+  fd.append("description", form.description);
+  fd.append("image", form.image);
 
-    await api.post("/clients", fd, true);
-    setForm({ name: "", designation: "", description: "", image: null });
-    setLoading(false);
-    fetchClients();
-  };
+  await api.post("/clients", fd, true);
+  setForm({ name: "", designation: "", description: "", image: null });
+  
+  // Reset file input
+  const fileInput = document.querySelector('input[type="file"]');
+  if (fileInput) fileInput.value = "";
+  
+  setLoading(false);
+  fetchClients();
+};
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 p-6">
+    <div className="min-h-screen bg-white p-6">
       <div className="max-w-7xl mx-auto space-y-8">
         {/* Header */}
         <div>
